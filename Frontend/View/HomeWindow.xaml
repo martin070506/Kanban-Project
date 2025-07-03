@@ -1,0 +1,99 @@
+﻿<Window x:Class="Frontend.View.HomeWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="clr-namespace:Frontend.ViewModel"
+        Title="Boards" Height="500" Width="400">
+
+    <Grid Background="#FF2D2D30">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0" Margin="0,10,0,10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- LogOut Button -->
+            <Button Grid.Column="0"
+            Content="LogOut"
+            Background="Transparent"
+            Foreground="Red"
+            BorderThickness="0"
+            FontSize="14"
+            Cursor="Hand"
+            Margin="10,0,10,0"
+            VerticalAlignment="Center"
+            Click="LogOut_Click"/>
+
+            <!-- Add Board Button -->
+            <Button Grid.Column="2"
+            Content="＋"
+            Width="30"
+            Height="30"
+            FontSize="20"
+            FontWeight="Bold"
+            Background="#FF4CAF50"
+            Foreground="White"
+            BorderThickness="0"
+            Cursor="Hand"
+            Margin="0,0,10,0"
+            Click="AddBoard_Click"/>
+        </Grid>
+
+
+
+        <!-- Boards List -->
+        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" Margin="10,0,10,10">
+            <ItemsControl ItemsSource="{Binding Boards}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Border Background="#FF3F3F3F" 
+                        Margin="0,5" 
+                        Padding="10" 
+                        CornerRadius="10">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+
+                                <!-- Board Details -->
+                                <StackPanel>
+                                    <TextBlock Foreground="White" FontSize="16" FontWeight="Bold">
+                                        <Hyperlink Click="BoardName_Click"
+                                                   Foreground="White"
+                                                   TextDecorations="{x:Null}">
+                                            <Run Text="{Binding Name}"/>
+                                        </Hyperlink>
+                                    </TextBlock>
+
+                                    <TextBlock Text="Owner:" Foreground="LightGray" FontSize="12"/>
+                                    <TextBlock Text="{Binding Owner}" Foreground="White"/>
+                                </StackPanel>
+
+                                <!-- Delete Button -->
+                                <Button Grid.Column="1"
+                                Width="24"
+                                Height="24"
+                                Margin="10,0,0,0"
+                                VerticalAlignment="Top"
+                                HorizontalAlignment="Right"
+                                Background="Transparent"
+                                BorderThickness="0"
+                                Cursor="Hand"
+                                ToolTip="Delete Board"
+                                Click="DeleteBoard_Click">
+                                    <TextBlock Text="🗑️" FontSize="16" Foreground="Red"/>
+                                </Button>
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
+    </Grid>
+</Window>
